@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Intersection Observer Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .box {
+      height: 200px;
+      width: 200px;
+      background-color: green;
+      margin-bottom: 20px;
+    }
+    .visible {
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Intersection Observer Example</h1>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.intersectionRatio > 0) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
+    }
+  });
+});
+
+boxes.forEach(box => {
+  observer.observe(box);
+});
+
+  </script>
+</body>
+</html>
