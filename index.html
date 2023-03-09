@@ -12,6 +12,18 @@
       border: 1px solid;
       margin-bottom: 20px;
     }
+    .box-new {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      height: 200px;
+      width: 200px;
+      background-color: red;
+      border: 1px solid;
+      margin-bottom: 20px;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.5s ease-in-out;
+    }
     .visible {
       background-color: blue;
     }
@@ -42,12 +54,25 @@ f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jque
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>
-  <div class="box"></div>
+  <div class="box-new"></div>
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>
 
   <script>
+    
+    const box = document.querySelector('.box-new');
+const windowHeight = window.innerHeight;
+
+function updateBoxPosition() {
+  const boxPosition = box.getBoundingClientRect().top;
+  const distanceFromTop = boxPosition / windowHeight;
+  const translateY = distanceFromTop * -100;
+  box.style.transform = `translate3d(0, ${translateY}px, 0)`;
+}
+
+window.addEventListener('scroll', updateBoxPosition);
+    
     const boxes = document.querySelectorAll('.box');
 
 const observer = new IntersectionObserver(entries => {
