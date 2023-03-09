@@ -23,7 +23,7 @@
     
     .container {
       position: relative;
-      height: 400px;
+      height: calc(400px*3);
       overflow: hidden;
     }
 
@@ -105,7 +105,7 @@ f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jque
 
   <script>
     
-    const container = document.querySelector('.container');
+   const container = document.querySelector('.container');
 const panels = document.querySelectorAll('.panel');
 const panelHeight = panels[0].clientHeight;
 
@@ -116,7 +116,24 @@ function setTransform() {
   });
 }
 
+function updatePanels() {
+  const scrollTop = container.scrollTop;
+  const activePanelIndex = Math.floor(scrollTop / panelHeight);
+  panels.forEach((panel, index) => {
+    if (index === activePanelIndex) {
+      panel.style.transform = 'translate3d(0, 0, 0)';
+    } else {
+      const transformValue = `translate3d(0, ${panelHeight}px, 0)`;
+      panel.style.transform = transformValue;
+    }
+  });
+}
+
 setTransform();
+
+container.addEventListener('scroll', () => {
+  updatePanels();
+});
 
 window.addEventListener('resize', () => {
   setTransform();
