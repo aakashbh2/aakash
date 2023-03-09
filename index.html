@@ -20,6 +20,38 @@
     .visible {
       background-color: blue !important;
     }
+    
+    .container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 400px;
+      transform: translate3d(0, 0, 0);
+      transition: transform 0.3s ease-in-out;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .panel-1 {
+      background-color: lightblue;
+    }
+
+    .panel-2 {
+      background-color: lightgreen;
+    }
+
+    .panel-3 {
+      background-color: lightpink;
+    }
+
+    
   </style>
   <!-- Start VWO Async SmartCode -->
 <script type='text/javascript' id='vwoCode'>
@@ -38,6 +70,25 @@ f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jque
 <!-- End VWO Async SmartCode -->
 </head>
 <body>
+ 
+  <h1>Panel</h1>
+  <div class="container">
+  <div class="panel panel-1">
+    <h2>Panel 1</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales enim sit amet ipsum tincidunt, ac sagittis ex pretium. Fusce nec nisi euismod, blandit enim et, commodo sapien. Mauris lacinia nulla sit amet elit blandit consectetur. </p>
+  </div>
+  <div class="panel panel-2">
+    <h2>Panel 2</h2>
+    <p>Maecenas eget quam suscipit, lobortis mi ac, congue massa. Duis sollicitudin massa ex, nec commodo orci ornare ac. Fusce nec purus vel mauris commodo imperdiet. Nam vitae sapien ac leo vehicula bibendum. </p>
+  </div>
+  <div class="panel panel-3">
+    <h2>Panel 3</h2>
+    <p>Proin rhoncus lobortis est nec facilisis. Sed eu metus non nulla tincidunt maximus vel eu odio. Donec auctor nibh vel est posuere, eu convallis neque tincidunt. Vivamus tristique aliquet enim, in fermentum ipsum maximus vel.</p>
+  </div>
+</div>
+
+  
+  
   <h1>Intersection Observer Example</h1>
   <div class="box"></div>
   <div class="box"></div>
@@ -53,6 +104,24 @@ f=false,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jque
   <div class="box"></div>
 
   <script>
+    
+    const container = document.querySelector('.container');
+const panels = document.querySelectorAll('.panel');
+const panelHeight = panels[0].clientHeight;
+
+function setTransform() {
+  panels.forEach((panel, index) => {
+    const transformValue = `translate3d(0, ${index * panelHeight}px, 0)`;
+    panel.style.transform = transformValue;
+  });
+}
+
+setTransform();
+
+window.addEventListener('resize', () => {
+  setTransform();
+});
+
     
     const box = document.querySelector('.box-new');
 const windowHeight = window.innerHeight;
